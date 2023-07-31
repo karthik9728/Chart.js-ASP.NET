@@ -1,0 +1,72 @@
+﻿@page
+@model Blackcoffer.Web.Pages.Industries.IndexModel
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Category List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a class="btn btn-success" asp-page="Create"><i class="bi bi-plus-circle"></i> Add Category</a>
+        </div>
+    </div>
+    <br />
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Sector</th>
+                <th>Topic</th>
+                <th>Title</th>
+                <th>Region</th>
+                <th>Intensity</th>
+                <th>Source</th>
+                <th>Insight</th>
+                <th>Pestle</th>
+                <th>Country</th>
+                <th>Relevance</th>
+                <th>Start Year</th>
+                <th>End Year</th>
+                <th>Added</th>
+                <th>Published</th>
+                <th>Impact</th>
+                <th>Url</th>
+                <th>Likelihood</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model.Industries)
+            {
+                <tr>
+                    <td>@obj.Sector</td>
+                    <td>@obj.Topic</td>
+                    <td>@obj.Title</td>
+                    <td>@obj.Region</td>
+                    <td>@obj.Intensity</td>
+                    <td>@obj.Source</td>
+                    <td>@obj.Insight</td>
+                    <td>@obj.Pestle</td>
+                    <td>@obj.Country</td>
+                    <td>@obj.Relevance</td>
+                    <td>@obj.Start_Year</td>
+                    <td>@obj.End_Year</td>
+                    <td>@obj.Added</td>
+                    <td>@obj.Published</td>
+                    <td>@obj.Impact</td>
+                    <td>@obj.Url</td>
+                    <td>@obj.Likelihood</td>            
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $('.table').DataTable();
+        })
+    </script>
+}

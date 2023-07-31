@@ -1,0 +1,173 @@
+﻿@page
+@model Blackcoffer.Web.Pages.Industries.DashboardModel
+@{
+}
+
+<div class="row">
+    <div class="col-sm-6 mb-4">
+        <h4 class="text-center"> Total : @Model.CountryCount Country's and its Intensity's</h4>
+        <div class="card">
+            <div>
+                <canvas id="pieCountry"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <h4 class="text-center">Total : @Model.RegionCount Region's and its Relevance's</h4>
+        <div class="card">
+            <div>
+                <canvas id="barRegion"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mb-4">
+        <h4 class="text-center">Total : @Model.SectorCount Sector's and its Likelihood's</h4>
+        <div class="card">
+            <div>
+                <canvas id="lineSector"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <h4 class="text-center">Combination of Topic and its Intensity</h4>
+        <div class="card">
+            <div>
+                <canvas id="pieTopic"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <h4 class="text-center">Combination of Pestle and its Relevance</h4>
+        <div class="card">
+            <div>
+                <canvas id="doughnut"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        //Pie Chart for Country with Intensity
+        const ctxPieCountry = document.getElementById('pieCountry');
+
+        new Chart(ctxPieCountry, {
+            type: 'pie',
+            data: {
+                labels: @Json.Serialize(Model.PieChartLabels),
+                datasets: [{
+                    label: 'Countries',
+                    data: @Json.Serialize(Model.PieChartData),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+
+        //Bar Chart
+        const ctxBarRegion = document.getElementById('barRegion');
+
+        new Chart(ctxBarRegion, {
+            type: 'bar',
+            data: {
+                labels: @Json.Serialize(Model.BarChartLabels),
+                datasets: [{
+                    label: '# Regions',
+                    data: @Json.Serialize(Model.BarChartData),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //Line Chart
+        const ctxLineSector = document.getElementById('lineSector');
+
+        new Chart(ctxLineSector, {
+            type: 'line',
+            data: {
+                labels: @Json.Serialize(Model.LineChartLabels),
+                datasets: [{
+                    label: '# Sector',
+                    data: @Json.Serialize(Model.LineChartData),
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //Line Chart
+        const ctxPieTopic = document.getElementById('pieTopic');
+
+        new Chart(ctxPieTopic, {
+            type: 'pie',
+            data: {
+                labels: @Json.Serialize(Model.PieTopicChartLabels),
+                datasets: [{
+                    label: '# Topic',
+                    data: @Json.Serialize(Model.PieTopicChartData),                
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        //Doughnut Chart
+        const ctxDoughnut = document.getElementById('doughnut');
+
+        new Chart(ctxDoughnut, {
+            type: 'doughnut',
+            data: {
+                labels: @Json.Serialize(Model.DoughnutChartLabels),
+                datasets: [{
+                    label: '# Topic',
+                    data: @Json.Serialize(Model.DoughnutChartData),
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+
+   
+    </script>
+}
+
